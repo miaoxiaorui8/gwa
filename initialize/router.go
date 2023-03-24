@@ -13,7 +13,7 @@ func Routers() *gin.Engine {
 	systemRouter := routers.RouterGroupApp.System
 	PublicGroup := Router.Group("")
 	{
-		systemRouter.InitApiRouter(PublicGroup) //测试路由
+		systemRouter.InitLoginRouter(PublicGroup) //登陆路由
 	}
 	return Router
 }

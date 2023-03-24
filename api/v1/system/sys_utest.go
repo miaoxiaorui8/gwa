@@ -1,13 +1,14 @@
 package system
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	res "gwa_server/models/response"
+)
 
 type USysTestApi struct {
 }
 
 func (sysTestApi *USysTestApi) GetTest(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"msg": "xxx",
-	})
+	res.FailWithMessage("1", c)
 	return
 }

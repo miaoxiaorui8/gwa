@@ -1,0 +1,125 @@
+{{ define "admin/login/login.html" }}
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>GWA后台管理系统</title>
+
+    <!-- App css -->
+    <link href="/static/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/jquery-confirm.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="account-body accountbg">
+
+<!-- Register page -->
+<div class="container">
+    <div class="row vh-100 d-flex justify-content-center">
+        <div class="col-12 align-self-center">
+            <div class="row">
+                <div class="col-lg-5 mx-auto">
+                    <div class="card">
+                        <div class="card-body p-0 auth-header-box">
+                            <div class="text-center p-3">
+                                <h4 class="mt-3 mb-1 font-weight-semibold text-white font-18">Gwa 后台管理系统</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active p-3" id="LogIn_Tab" role="tabpanel">
+                                    <form class="form-horizontal auth-form my-4" action="index.html">
+
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                            </div>
+                                        </div><!--end form-group-->
+
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+                                            </div>
+                                        </div><!--end form-group-->
+
+                                        <div class="form-group mb-0 row">
+                                            <div class="col-12 mt-2">
+                                                <button id="btnLogin" class="btn btn-primary btn-block waves-effect waves-light" type="button">Log In <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                            </div><!--end col-->
+                                        </div> <!--end form-group-->
+                                    </form><!--end form-->
+                                </div>
+                            </div>
+                        </div><!--end card-body-->
+                        <div class="card-body bg-light-alt text-center pt-0">
+                            <span class="text-muted d-none d-sm-inline-block">Gwa 后台管理系统 © 2023</span>
+                        </div>
+                    </div><!--end card-->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end col-->
+    </div><!--end row-->
+</div><!--end container-->
+<!-- End Register page -->
+
+
+
+
+<!-- jQuery  -->
+<script src="/static/admin/js/jquery.min.js"></script>
+<script src="/static/admin/js/bootstrap.bundle.min.js"></script>
+<script src="/static/admin/js/waves.js"></script>
+<script src="/static/admin/js/feather.min.js"></script>
+<script src="/static/admin/js/simplebar.min.js"></script>
+<script src="/static/admin/js/jquery-confirm.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        // 回车触发按钮事件
+        $(document).keyup(function (event) {
+            if (event.keyCode === 13) {
+                $("#btnOk").trigger("click");
+            }
+        });
+
+        $('#btnLogin').on('click', function () {
+            const username = $("#username").val();
+            if (username === "") {
+                $.alert({
+                    title: '温馨提示',
+                    content: '请输入用户名',
+                });
+                return false;
+            }
+
+            const password = $("#password").val();
+            if (password === "") {
+                $.alert({
+                    title: '温馨提示',
+                    content: '请输入密码',
+                });
+                return false;
+            }
+
+            const postData = {
+                username: username,
+                password: password,
+            };
+            console.log(postData)
+            $.ajax({
+                url: "/api/gwa/login",
+                type: "POST",
+                data: postData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>
+{{end}}
