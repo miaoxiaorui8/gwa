@@ -22,5 +22,5 @@ func InitConf() {
 		log.Fatalf("configyaml初始化拆分失败: %v", err)
 	}
 	log.Println("yaml文件初始化成功")
-	global.Config = c
+	global.GWA_Config = c
 }

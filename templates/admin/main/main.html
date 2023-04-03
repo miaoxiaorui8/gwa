@@ -1,0 +1,71 @@
+{{ define "admin/main/main.html" }}
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Dastyle - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <!--  <link rel="shortcut icon" href="/static/admin/images/favicon.ico">-->
+
+    <!-- jvectormap -->
+    <link href="/static/admin/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+
+    <!-- App css -->
+    <link href="/static/admin/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="/static/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+    <link href="/static/admin/css/app-dark.min.css" rel="stylesheet" type="text/css" />
+    <style>
+
+
+    </style>
+</head>
+<body class="dark-sidenav">
+<!-- Left Sidenav -->
+<div class="left-sidenav">
+
+    {{ template "admin/public/menu.html" .}}
+
+</div>
+
+<!-- end left-sidenav-->
+
+
+<div class="page-wrapper">
+    <!-- Top Bar Start -->
+    <!-- Navbar -->
+    {{ template "admin/public/nav.html" . }}
+    <!-- end navbar-->
+    <!-- Top Bar End -->
+
+    <!-- Page Content-->
+    <div class="page-content">
+        <div class="container-fluid">
+            <!-- Page-Title -->
+
+            <h1>仪表盘</h1>
+
+            {{template "admin/public/footer.html" .}}
+
+        </div>
+    </div>
+</div>
+
+
+
+{{template "admin/public/js.html" .}}
+
+<!--<script src="/static/admin/apex-charts/apexcharts.min.js"></script>-->
+<script src="/static/admin/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+<script src="/static/admin/jvectormap/jquery-jvectormap-us-aea-en.js"></script>
+<!--<script src="/static/admin/pages/jquery.analytics_dashboard.init.js"></script>-->
+
+</body>
+</html>
+{{ end }}

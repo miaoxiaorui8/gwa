@@ -1,8 +1,12 @@
 {{ define "admin/login/login.html" }}
 <html lang="zh-CN">
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>GWA后台管理系统</title>
+    <meta charset="utf-8" />
+    <title>Dastyle - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App css -->
     <link href="/static/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -68,20 +72,33 @@
 
 
 
-<!-- jQuery  -->
-<script src="/static/admin/js/jquery.min.js"></script>
-<script src="/static/admin/js/bootstrap.bundle.min.js"></script>
-<script src="/static/admin/js/waves.js"></script>
-<script src="/static/admin/js/feather.min.js"></script>
-<script src="/static/admin/js/simplebar.min.js"></script>
+{{template "admin/public/js.html" .}}
 <script src="/static/admin/js/jquery-confirm.min.js"></script>
+<script src="/static/admin/js/md5.min.js"></script>
+<script src="/static/admin/js/jquery.cookie.min.js"></script>
 <script>
     $(document).ready(function () {
+
+        // $.ajax({
+        //   url: "/api/gwa/home",
+        //   type: "POST",
+        //   success: function(response) {
+        //     // 处理响应值
+        //     if (response.msg=="操作成功"){
+        //       //跳转页面
+        //       location.href = "/gwa";
+        //     }
+        //   },
+        //   error: function(jqXHR, textStatus, errorThrown) {
+        //     // 处理错误
+        //     console.log(errorThrown);
+        //   }
+        // });
 
         // 回车触发按钮事件
         $(document).keyup(function (event) {
             if (event.keyCode === 13) {
-                $("#btnOk").trigger("click");
+                $("#btnLogin").trigger("click");
             }
         });
 
@@ -106,15 +123,33 @@
 
             const postData = {
                 username: username,
-                password: password,
+                password: md5(password),
             };
-            console.log(postData)
             $.ajax({
                 url: "/api/gwa/login",
                 type: "POST",
                 data: postData,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+                },
+                success: function(response) {
+                    // 处理响应值
+                    if (response.code != 200){
+                        $.alert({
+                            title: '温馨提示',
+                            content: response.msg,
+                        });
+                    }else{
+                        // 储存Token
+                        $.cookie('Token',response.data.token, {expires: response.data.expiresAt
+                        });
+                        //跳转页面
+                        location.href = "/gwa";
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // 处理错误
+                    console.log(errorThrown);
                 }
             });
         });
